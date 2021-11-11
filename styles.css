@@ -35,9 +35,32 @@ body{
     background-color: rgba(255, 255, 255, .9);
 
 }
+.calculator-grid > button:active{
+    background-color: rgba(231, 248, 212, 0.9);
+
+}
 
 .span-two{
     grid-column: span 2;
+
+}
+#ac{
+    background-color: rgb(240, 190, 96);
+    
+    
+}
+#ac:active{
+    background-color: rgb(235, 173, 59);
+    
+    
+}
+#equals:hover{
+    background-color: rgb(247, 143, 94);
+    
+}
+#equals:active{
+    background-color: rgb(94, 247, 181);
+    
 }
 .output{
     grid-column: 1/ -1;
