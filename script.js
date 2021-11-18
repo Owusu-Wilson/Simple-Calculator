@@ -26,6 +26,9 @@ class Calculator{
         if(this.previousOperand !== ''){
             this.compute()
         }
+        this.operation = operation
+        this.previousOperand = this.currentOperand
+        this.currentOperand = ''
     }
 
     compute(){
@@ -60,8 +63,31 @@ class Calculator{
         this.previousOperand = ''
     }
 
+    getDisplayNumber(number){
+        const stringNumber = number.toString()
+        const integerDigits = parseFloat(stringNumber.split('.')[0])
+        const decimalDigits = stringNumber.split('.')[1]
+        let integerDisplay
+        if (isNaN(integerDigits)){
+            integerDisplay = ''
+        }else{
+            integerDisplay = integerDigits.toLocaleString('en', {
+                maximumFractionDigits:0
+            })
+        }
+        if (decimalDigits !=null){
+            return `${integerDisplay}.${decimalDigits}`
+        }else{
+            return integerDisplay
+        }
+    }
     updateDisplay(){
-        this.currentOperandTextElement.innerText = this.currentOperand
+        this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand)
+        if(this.operation!=null){
+            this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+        }else{
+            this.previousOperandTextElement.innerText = ''
+        }
     }
 
 
@@ -89,6 +115,12 @@ numberButtons.forEach(button=> {
         
     })
 })
+operationButtons.forEach(button=>{
+    button.addEventListener('click', () =>{
+        calc.chooseOperation(button.innerText)
+        calc.updateDisplay()
+    })
+})
 
 equalsButton.addEventListener('click', button =>{
     calc.compute()
@@ -96,6 +128,13 @@ equalsButton.addEventListener('click', button =>{
 })
 allClearButton.addEventListener('click', button =>{
     calc.clear()
+    calc.updateDisplay()
+})
+deleteButton.addEventListener('click', button =>{
+   s = calc.currentOperand.toString()
+   s = s.substring(0, s.length-1)
+   calc.currentOperand = s
+    
     calc.updateDisplay()
 })
 
