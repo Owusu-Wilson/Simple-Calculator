@@ -10,6 +10,10 @@ body{
     margin: 0;
     background: linear-gradient(to right, #00AAFF, #00FF6C);
 }
+h2{
+    align-items: center;
+    justify-content: center;
+}
 
 .calculator-grid{
     display: grid;
